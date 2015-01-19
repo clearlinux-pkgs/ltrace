@@ -1,0 +1,84 @@
+From 694d19ff14017926454771cbb63a22355b72f1bf Mon Sep 17 00:00:00 2001
+From: Faraz Shahbazker <faraz.shahbazker@imgtec.com>
+Date: Tue, 3 Feb 2015 13:07:55 -0800
+Subject: [PATCH] Fix missing includes and return statements in test sources
+
+Fix warnings while compiling test cases by adding missing #includes and
+return statements. Missing arguments provided for functions wait()/wcswidth()
+---
+ testsuite/ltrace.main/filters.exp            | 1 +
+ testsuite/ltrace.main/main-internal.exp      | 4 +++-
+ testsuite/ltrace.main/main-threaded.c        | 1 +
+ testsuite/ltrace.main/parameters.c           | 1 +
+ testsuite/ltrace.main/parameters2.exp        | 2 +-
+ testsuite/ltrace.main/parameters3.exp        | 2 ++
+ testsuite/ltrace.main/system_call_params.exp | 4 ++++
+ testsuite/ltrace.minor/attach-process.exp    | 1 +
+ testsuite/ltrace.minor/libdl-simple.c        | 2 ++
+ testsuite/ltrace.minor/time-record.c         | 1 +
+ testsuite/ltrace.minor/trace-clone.c         | 2 ++
+ testsuite/ltrace.minor/trace-fork.c          | 4 +++-
+ testsuite/ltrace.minor/wchar.exp             | 3 ++-
+ testsuite/ltrace.torture/vfork-thread.c      | 1 +
+ 14 files changed, 25 insertions(+), 4 deletions(-)
+
+diff --git a/testsuite/ltrace.main/filters.exp b/testsuite/ltrace.main/filters.exp
+index 988346f..f7f4140 100644
+--- a/testsuite/ltrace.main/filters.exp
++++ b/testsuite/ltrace.main/filters.exp
+@@ -22,6 +22,7 @@ set libfilt1 [ltraceCompile libfilt1.so [ltraceSource c {
+ }]]
+ 
+ set libfilt2 [ltraceCompile libfilt2.so [ltraceSource c {
++    #include <stdio.h>
+     void func2(void) { puts("func2"); }
+ }]]
+ 
+diff --git a/testsuite/ltrace.main/main-internal.exp b/testsuite/ltrace.main/main-internal.exp
+index 0ca5e14..112c69b 100644
+--- a/testsuite/ltrace.main/main-internal.exp
++++ b/testsuite/ltrace.main/main-internal.exp
+@@ -19,11 +19,13 @@
+ set bin [ltraceCompile {} [ltraceSource c {
+     __attribute__((noinline)) void this(void) {}
+     __attribute__((noinline)) void that(void) {}
+-    int main(int i) {
++    int main() {
++	int i;
+ 	for (i = 0; i < 12; ++i) {
+ 	    this();
+ 	    that();
+ 	}
++	return 0;
+     }
+ }]]
+ 
+diff --git a/testsuite/ltrace.main/parameters.c b/testsuite/ltrace.main/parameters.c
+index a3d8bb5..aa862b9 100644
+--- a/testsuite/ltrace.main/parameters.c
++++ b/testsuite/ltrace.main/parameters.c
+@@ -17,6 +17,7 @@ void func_intptr_ret(int *i);
+ int func_strlen(char*);
+ void func_strfixed(char*);
+ void func_ppp(int***);
++void func_string(char*);
+ void func_stringp(char**);
+ void func_short(short, short);
+ void func_ushort(unsigned short, unsigned short);
+diff --git a/testsuite/ltrace.main/parameters2.exp b/testsuite/ltrace.main/parameters2.exp
+index 9850079..1c7b3b4 100644
+--- a/testsuite/ltrace.main/parameters2.exp
++++ b/testsuite/ltrace.main/parameters2.exp
+@@ -17,7 +17,7 @@
+ # 02110-1301 USA
+ 
+ set trivial [ltraceCompile {} [ltraceSource c {
+-    int main(void) {}
++    int main(void) {return 0;}
+ }]]
+ 
+ ltraceMatch1 [ltraceRun -L -F [ltraceSource conf {
+ 
+-- 
+2.1.0
+

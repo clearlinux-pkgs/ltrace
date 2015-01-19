@@ -1,0 +1,1 @@
+--disable-static --sysconfdir=/usr/share/defaults/ltrace
