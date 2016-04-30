@@ -4,3 +4,4 @@ libunwind-dev
 tcl
 dejagnu
 expect
+elfutils-dev

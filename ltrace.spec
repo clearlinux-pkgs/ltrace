@@ -4,7 +4,7 @@
 #
 Name     : ltrace
 Version  : 0.7.3.orig
-Release  : 16
+Release  : 17
 URL      : http://www.ltrace.org/ltrace_0.7.3.orig.tar.bz2
 Source0  : http://www.ltrace.org/ltrace_0.7.3.orig.tar.bz2
 Summary  : Tracks runtime library calls from dynamically linked executables.
@@ -14,6 +14,7 @@ Requires: ltrace-bin
 Requires: ltrace-data
 Requires: ltrace-doc
 BuildRequires : dejagnu
+BuildRequires : elfutils-dev
 BuildRequires : expect
 BuildRequires : libunwind-dev
 BuildRequires : tcl
