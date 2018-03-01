@@ -1,0 +1,6 @@
+Configure miss: cplus_demangle in -liberty
+Configure miss: selinux/selinux.h usability
+Configure miss: selinux/selinux.h presence
+Configure miss: selinux/selinux.h
+Configure miss: security_get_boolean_active in -lselinux
+Configure miss: whether to enable debugging
