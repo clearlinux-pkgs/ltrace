@@ -4,7 +4,7 @@
 #
 Name     : ltrace
 Version  : 0.7.3
-Release  : 25
+Release  : 26
 URL      : http://www.ltrace.org/ltrace_0.7.3.orig.tar.bz2
 Source0  : http://www.ltrace.org/ltrace_0.7.3.orig.tar.bz2
 Summary  : Tracks runtime library calls from dynamically linked executables.
@@ -86,15 +86,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604100447
+export SOURCE_DATE_EPOCH=1644951116
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static --disable-static --sysconfdir=/usr/share/defaults/ltrace
 make  %{?_smp_mflags}
 
@@ -106,7 +106,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1604100447
+export SOURCE_DATE_EPOCH=1644951116
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ltrace
 cp %{_builddir}/ltrace-0.7.3/COPYING %{buildroot}/usr/share/package-licenses/ltrace/b47456e2c1f38c40346ff00db976a2badf36b5e3
